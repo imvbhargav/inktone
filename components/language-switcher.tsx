@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
+import { Language, useLanguage } from "@/store/language";
 
 export default function LanguageSwitcher() {
-  const [language, setLanguage] = useState<"kn" | "en" | "bn">("en");
+  const { language, setLanguage } = useLanguage();
+
   return (
     <div className="bg-background flex rounded overflow-hidden w-fit">
       <Button

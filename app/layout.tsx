@@ -38,6 +38,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Inktone",
   description: "Easy CMS for Astro JamStack sites",
+  icons: {
+    icon: "/inktone.png",
+  },
 };
 
 export default function RootLayout({

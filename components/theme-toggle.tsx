@@ -6,10 +6,12 @@ import { useTheme } from "next-themes";
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/store/language";
+import { dark, light, system } from "@/constants/i18n";
 
 export function ModeToggle() {
   const { theme, setTheme } = useTheme();
-
+  const { language } = useLanguage();
   return (
     <div className="bg-background flex rounded overflow-hidden w-fit">
       <Button
@@ -21,7 +23,7 @@ export function ModeToggle() {
         )}
         suppressHydrationWarning
       >
-        <Moon /> Dark
+        <Moon /> {dark[language]}
       </Button>
       <Button
         variant={"ghost"}
@@ -32,7 +34,7 @@ export function ModeToggle() {
         )}
         suppressHydrationWarning
       >
-        <Sun /> Light
+        <Sun /> {light[language]}
       </Button>
       <Button
         variant={"ghost"}
@@ -43,7 +45,7 @@ export function ModeToggle() {
         )}
         suppressHydrationWarning
       >
-        <Monitor /> System
+        <Monitor /> {system[language]}
       </Button>
     </div>
   );

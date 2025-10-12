@@ -1,6 +1,14 @@
 "use client";
 
+import {
+  editor,
+  languageFonts,
+  logout,
+  setting,
+  siteName,
+} from "@/constants/i18n";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/store/language";
 import { Cog, FileEdit, LogOut, SidebarClose, SidebarOpen } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -8,6 +16,7 @@ import { useState } from "react";
 
 export default function Sidebar() {
   const router = useRouter();
+  const { language } = useLanguage();
 
   const [isOpen, setIsOpen] = useState(false);
   return (
@@ -23,11 +32,13 @@ export default function Sidebar() {
         <Link
           href={"/"}
           className={cn(
-            "text-2xl font-black text-gray-900 dark:text-gray-100",
-            !isOpen && "hidden"
+            "font-black text-gray-900 dark:text-gray-100",
+            !isOpen && "hidden",
+            languageFonts[language],
+            language !== "en" ? "text-xl" : "text-2xl"
           )}
         >
-          Inktone.
+          {siteName[language]}
         </Link>
         <button
           onClick={() => setIsOpen((prev) => !prev)}
@@ -42,7 +53,12 @@ export default function Sidebar() {
           {isOpen ? <SidebarClose size={22} /> : <SidebarOpen size={22} />}
         </button>
       </div>
-      <div className="flex flex-col rounded-md border border-card-foreground/10 divide-y divide-card-foreground/10 overflow-hidden">
+      <div
+        className={cn(
+          "flex flex-col rounded-md border border-card-foreground/10 divide-y divide-card-foreground/10 overflow-hidden",
+          languageFonts[language]
+        )}
+      >
         <button
           onClick={() => {
             setIsOpen(false);
@@ -55,7 +71,9 @@ export default function Sidebar() {
           )}
         >
           <FileEdit size={22} />
-          <span className={isOpen ? "block" : "hidden"}>Editor</span>
+          <span className={isOpen ? "block" : "hidden"}>
+            {editor[language]}
+          </span>
         </button>
         <button
           onClick={() => {
@@ -69,7 +87,9 @@ export default function Sidebar() {
           )}
         >
           <Cog size={22} />
-          <span className={isOpen ? "block" : "hidden"}>Settings</span>
+          <span className={isOpen ? "block" : "hidden"}>
+            {setting[language]}
+          </span>
         </button>
         <button
           className={cn(
@@ -79,7 +99,9 @@ export default function Sidebar() {
           )}
         >
           <LogOut size={22} />
-          <span className={isOpen ? "block" : "hidden"}>Logout</span>
+          <span className={isOpen ? "block" : "hidden"}>
+            {logout[language]}
+          </span>
         </button>
       </div>
     </div>
