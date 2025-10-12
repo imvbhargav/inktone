@@ -87,6 +87,9 @@ export function useExport(editor: Editor | null) {
         printArea.style.overflow = originalStyles.printAreaOverflow;
         body.style.overflow = originalStyles.bodyOverflow;
         html.style.overflow = originalStyles.htmlOverflow;
+        if (editor) {
+          (editor as HTMLElement).style.cssText = "";
+        }
       }, 100);
     }, 250);
   }, []);
