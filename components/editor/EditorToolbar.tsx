@@ -30,7 +30,7 @@ export function EditorToolbar({
         onChange={(e) => onTitleChange(e.target.value)}
         placeholder={untitledDocument[language]}
         className={cn(
-          "mt-4 md:mt-0 md:text-lg rounded bg-transparent dark:bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-foreground/10 focus:ring-foreground/10 font-semibold w-full px-1 font-anek-latin print:hidden",
+          "mt-4 md:mt-0 md:text-lg rounded bg-transparent dark:bg-transparent border-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:border-foreground/10 focus:ring-foreground/10 font-semibold w-full px-1 font-anek-latin print:hidden shadow-none",
           languageFonts[language]
         )}
       />

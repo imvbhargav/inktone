@@ -1,7 +1,7 @@
 import { Editor } from "@tiptap/react";
 
 export interface NotionLikeEditorProps {
-  initialContent?: string;
+  initialContent?: string | null;
   onSave?: (data: { html: string; json: object }) => void;
 }
 

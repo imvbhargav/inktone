@@ -16,6 +16,7 @@ import { useExport } from "@/hooks/useExport";
 import { useKeyboardHandler } from "@/hooks/useKeyboardHandler";
 import { useClickOutside } from "@/hooks/useClickOutside";
 import { useSelectedIndex } from "@/hooks/useSelectedIndex";
+import { useAutoSave } from "@/hooks/useAutoSave";
 import {
   createHeadingCommands,
   createMainCommands,
@@ -26,39 +27,50 @@ import { useLanguage } from "@/store/language";
 import { Transliteration } from "./extensions/transliteration";
 import { Placeholder } from "@tiptap/extensions";
 import { languageFonts, languagePlaceholders } from "@/constants/i18n";
+import { usePosts } from "@/store/posts";
 
 export default function InktoneEditor({
-  initialContent = "",
+  initialContent = null,
   onSave,
 }: NotionLikeEditorProps) {
+  const [extensions, setExtenstions] = useState(getEditorExtensions());
   const [showImageModal, setShowImageModal] = useState(false);
   const [title, setTitle] = useState("");
   const { language } = useLanguage();
-  const [extensions, setExtenstions] = useState(getEditorExtensions());
+  const { open_post } = usePosts();
 
   useEffect(() => {
+    setTitle(open_post?.title ?? "");
+  }, [open_post]);
+
+  useEffect(() => {
+    let extensions_to_add = [];
     if (language !== "en") {
-      setExtenstions([
-        ...extensions,
+      extensions_to_add.push(
         Transliteration.configure({
           font: languageFonts[language],
           language: `${language}-t-i0-und`,
           apiEndpoint: "https://inputtools.google.com/request",
-        }),
-        Placeholder.configure({
-          placeholder: languagePlaceholders[language],
-          showOnlyWhenEditable: true,
-          showOnlyCurrent: true,
-        }),
-      ]);
+        })
+      );
     }
+
+    extensions_to_add.push(
+      Placeholder.configure({
+        placeholder: languagePlaceholders[language],
+        showOnlyWhenEditable: true,
+        showOnlyCurrent: true,
+      })
+    );
+
+    setExtenstions([...getEditorExtensions(), ...extensions_to_add]);
   }, [language]);
 
   const editor = useEditor(
     {
       extensions: extensions,
       immediatelyRender: false,
-      content: initialContent || "",
+      content: initialContent ?? open_post?.content ?? "",
     },
     [extensions]
   );
@@ -71,6 +83,9 @@ export default function InktoneEditor({
       };
     },
   });
+
+  // Auto-save hook - saves content automatically as user types
+  useAutoSave({ editor, title, delay: 1000 });
 
   const { wrap } = useEditorCommands(editor);
   const {
