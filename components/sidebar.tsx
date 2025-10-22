@@ -22,7 +22,7 @@ export default function Sidebar() {
   return (
     <div
       className={cn(
-        "print:hidden h-[calc(100%-8px)] md:h-full bg-card p-1 rounded-r-md border border-l-0 border-card-foreground/10 transition-all duration-300",
+        "print:hidden h-[calc(100vh-8px)] md:h-full bg-card p-1 rounded-r-md border border-l-0 border-card-foreground/10 transition-all duration-300",
         "md:relative w-64 absolute my-1 md:my-0 top-0 left-0 z-50",
         "flex flex-col justify-between",
         isOpen ? "left-0 md:w-64" : "-left-64 md:left-0 md:w-16"
