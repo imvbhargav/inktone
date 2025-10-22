@@ -72,3 +72,33 @@ export const languageText = {
   kn: "ಭಾಷೆ",
   bn: "ভাষা",
 };
+
+export const appearance = {
+  en: "Appearance",
+  kn: "ದೃಶ್ಯ",
+  bn: "দৃশ্যমানতা",
+};
+
+export const authentication = {
+  en: "Authentication",
+  kn: "ಪ್ರಮಾಣೀಕರಣ",
+  bn: "প্রমাণীকরণ",
+};
+
+export const addnewrepo = {
+  en: "Add New Repository",
+  kn: "ಹೊಸ ರೆಪೊಸಿಟರಿ ಸೇರಿಸಿ",
+  bn: "নতুন রিপোজিটরি যোগ করুন",
+};
+
+export const logoutText = {
+  en: "Logout",
+  kn: "ಲಾಗ್ ಔಟ್",
+  bn: "লগ আউট",
+};
+
+export const loginText = {
+  en: "Login with GitHub",
+  kn: "GitHub ಮೂಲಕ ಲಾಗಿನ್ ಮಾಡಿ",
+  bn: "GitHub দিয়ে লগইন করুন",
+};

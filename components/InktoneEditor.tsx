@@ -28,6 +28,7 @@ import { Transliteration } from "./extensions/transliteration";
 import { Placeholder } from "@tiptap/extensions";
 import { languageFonts, languagePlaceholders } from "@/constants/i18n";
 import { usePosts } from "@/store/posts";
+import "highlight.js/styles/monokai.css";
 
 export default function InktoneEditor({
   initialContent = null,
